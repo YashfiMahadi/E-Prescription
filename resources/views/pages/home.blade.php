@@ -16,9 +16,8 @@
                 <div class="page-header-breadcrumb">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
+                            <a href="{{ URL::to('/admin') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dpr-ri') }}">Dashboard</a> </li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +30,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Table DPR RI</h5>
+                        <h5>Dashboard</h5>
                     </div>
                     <div class="card-body">
                         Hallo !

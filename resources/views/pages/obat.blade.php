@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'DPR KAB KOTA')
+@section('title', 'Obat')
 
 @push('head')
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
@@ -18,8 +18,8 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h4><strong>DPR KAB KOTA</strong></h4>
-                        <span>Master Data DPR KAB KOTA</span>
+                        <h4><strong>Obat</strong></h4>
+                        <span>Master Data obat</span>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dprd-kab-kota') }}">DPR KAB KOTA</a> </li>
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dprd-prov') }}">Obat</a> </li>
                     </ul>
                 </div>
             </div>
@@ -42,40 +42,29 @@
             <div class="col-sm-12">
                 <div class="card" id="tableCard">
                     <div class="card-header bg-default">
-                        <h5>Table DPR KAB KOTA</h5>
-                        <div class="card-header-right">
-                            <ul class="list-unstyled card-option">
-                                <li>
-                                    <a href="javascript:void(0)" id="create" data-toggle="tooltip" data-placement="top" title="Tambah Data">
-                                        <i class="fa fa-plus-square text-success" style="font-size: 1.8rem"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="d-flex justify-content-between">
+                            <h5>Table Obat</h5>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="mb-4">
-                            <a href="{{ URL::to('/admin/dprd-kab-kota/export') }}" class="btn btn-success">
-                                <i class="fa fa-file-excel-o"></i>
-                                Export Excel
-                            </a>
-                            <a href="javascript:void(0)" class="btn btn-success" id="import">
-                                <i class="fa fa-file-excel-o"></i>
-                                Import Excel
-                            </a>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <a href="javascript:void(0)" class="btn btn-primary">
+                                    <i class="zmdi zmdi-shopping-cart-plus" style="font-size: 1.2rem"></i>
+                                    Tambah Ke Keranjang
+                                </a>
+                            </div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive my-3">
                             <table class="table table-striped table-bordered table-hover w-100" id="table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Tingkat</th>
-                                        <th>Province</th>
-                                        <th>Kab / Kota</th>
-                                        <th>gaji</th>
-                                        <th>Periode</th>
-                                        <th>action</th>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Stok</th>
+                                        <th>Dibuat Tanggal</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,10 +73,6 @@
                         </div>
                     </div>
                 </div>
-                @include('components.actions.masterData.dprdKabKota.create')
-                @include('components.actions.masterData.dprdKabKota.edit')
-                @include('components.modals.masterData.dprdKabKota.table')
-                @include('components.modals.masterData.dprdKabKota.import')
             </div>
         </div>
     </div>

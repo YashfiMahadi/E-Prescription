@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Adminty - @yield('title')</title>
+    <title> E-PRESCRIPTION - @yield('title')</title>
 
     @include('layouts.head')
 
