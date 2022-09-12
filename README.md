@@ -9,35 +9,32 @@
 
 <h1 align="center"> Cara install Aplikasi </h1>
     <br>
-    <br>
     <ol type="1">
         <li> Download file di atas E-Prescription-main.zip </li>
         <li> Extract file yang sudah di download </li>
         <li> Pastikan PC kalian sudah terinstall composer 2.4.1 </li>
-        <li> untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
-        <li> import ke database anda</li>
         <li> buka terminal </li>
         <li>
-            ketik cd letak file yang sudah di Extract tadi contoh <br>
-            cd c:/project/laravel/E-Prescription-main
+            ketik cd letak file yang sudah di Extract tadi contoh <br> <br>
+            cd c:/project/laravel/E-Prescription-main <br>
         </li>
         <li>
-            lalu ketik <br>
-            composer update
+            lalu ketik <br> <br>
+            composer update <br>
         </li>
         <li>
-            untuk copy file env nya ketik <br>
-            copy .env.example .env
+            untuk copy file env nya ketik <br> <br>
+            copy .env.example .env <br>
         </li>
         <li> untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
         <li> import ke database anda</li>
         <li> ubah nama database yang ada pada file env</li>
         <li>
-            apabila berhasil ketik <br>
-            php artisan key:generate
+            apabila berhasil ketik <br> <br>
+            php artisan key:generate <br>
         </li>
         <li>
-            dan terakhir untuk menjalankan aplikasinya ketik <br>
-            php artisan serve
+            dan terakhir untuk menjalankan aplikasinya ketik <br> <br>
+            php artisan serve <br>
         </li>
     </ol>
