@@ -18,6 +18,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets\icon\icofont\css\icofont.css') }}">
 <!-- feather Awesome -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets\icon\feather\css\feather.css') }}">
+<!-- ion icon css -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets\icon\ion-icon\css\ionicons.min.css') }}">
 <!-- Font Awesome -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets\icon\font-awesome\css\font-awesome.min.css') }}">
 @stack('head')

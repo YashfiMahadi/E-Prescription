@@ -1,4 +1,56 @@
 <script>
+     // SECTION hapus data
+     const deleteData = (id) => {
+        Swal.fire({
+            title: 'Apa anda yakin untuk Remove ini?',
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result)=>{
+            if(result.value){
+                Swal.fire({
+                    title: 'Please Wait!',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    willOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: `/admin/keranjang/${id}/delete`,
+                    data: {
+                        'id': id
+                    },
+                    dataType: "JSON",
+                    success: function (response) {
+                        swal.close();
+
+                        if(response.status) {
+                            Swal.fire(
+                                'Success!',
+                                response.msg,
+                                'success'
+                            )
+
+                            $('#table').DataTable().ajax.reload();
+
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.msg,
+                                'warning'
+                            )
+                        }
+                    }
+                });
+            }
+        });
+    }
+    // !SECTION hapus data
+
     $(function () {
 
         // SECTION Datatable
@@ -34,7 +86,7 @@
         // !SECTION set CSRF token
 
         // SECTION add
-        $('#tambahKeranjang').click(function (e) {
+        $('#simpanResep').click(function (e) {
             e.preventDefault();
 
             Swal.fire({
@@ -46,11 +98,11 @@
                 },
             });
 
-            const formData  = new FormData($("#createForm")[0]);
+            const formData  = new FormData($("#formObatTransaksi")[0]);
 
             $.ajax({
                 type: "POST",
-                url: "/admin/keranjang/tambah-keranjang",
+                url: "/admin/keranjang/simpan-resep",
                 data: formData,
                 dataType: "JSON",
                 cache:false,

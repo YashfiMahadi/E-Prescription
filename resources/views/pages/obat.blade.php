@@ -49,7 +49,6 @@
                         <form method="post" id="createForm">
                             <div class="row">
                                 <div class="col-md-6">
-
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <button type="button" class="btn btn-secondary" id="racikan">
@@ -86,6 +85,7 @@
     </div>
 
     @include('components.columns.obat.modalNonRacikan')
+
 @endsection
 
 @push('script')

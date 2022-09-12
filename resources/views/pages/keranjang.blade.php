@@ -61,10 +61,16 @@
                                 </tbody>
                             </table>
                         </div>
-                        <form method="post" id="formObatTransaksi">
+                        @if (count($keranjang) > 0)
+                        <form method="POST" id="formObatTransaksi">
+                            <div class="form-group">
+                                <label for="name">Nama resep Obat </label>
+                                <input type="text" name="name" class="form-control" id="nama" placeholder="isi nama resep" required>
+                            </div>
                             @foreach ($keranjang as $value)
                                 <div class="form-group">
                                     <label for="signa">Pilih signa {{ $value->name }} </label>
+                                    <input type="hidden" name="id[]" id="id" value="{{ $value->id }}">
                                     <select name="signa[]" class="form-control" id="signa" required>
                                         @foreach ($signa as $item)
                                             <option value="{{ $item->signa_id }}">{{ $item->signa_nama }}</option>
@@ -72,11 +78,12 @@
                                     </select>
                                 </div>
                             @endforeach
-                            <button type="button" class="btn btn-primary" id="tambahKeranjang">
-                                <i class="fa fa-credit-card-alt" style="font-size: 1.2rem"></i>
-                                transaksi
+                            <button type="button" class="btn btn-primary" id="simpanResep">
+                                <i class="ti-save" style="font-size: 1.2rem"></i>
+                                Simpan resep
                             </button>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>

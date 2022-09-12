@@ -17,7 +17,7 @@ class KeranjangController extends Controller
         $data = [
             'link' => '/admin/keranjang',
             'js' => 'components.js.keranjang',
-            'keranjang' => DB::table('keranjang')->orderBy('id', 'DESC')->get(),
+            'keranjang' => DB::table('keranjang')->orderBy('id', 'DESC')->where('is_active', '<>', '0')->get(),
             'signa' => DB::table('signa_m')->orderBy('signa_id', 'DESC')->get(),
         ];
 
@@ -34,6 +34,7 @@ class KeranjangController extends Controller
         if (is_numeric($id)) {
             // SECTION ambil data tunggal
             $keranjang = DB::table('keranjang')
+                ->where('is_active', '<>', '0')
                 ->where('id', $id)
                 ->first();
 
@@ -47,6 +48,7 @@ class KeranjangController extends Controller
             // SECTION datatables
             // SECTION data
             $data   = DB::table('keranjang')
+                ->where('is_active', '<>', '0')
                 ->orderBy('id', 'DESC')
                 ->get();
             // !SECTION data
@@ -78,7 +80,7 @@ class KeranjangController extends Controller
         // !SECTION AMBIL DATA
     }
 
-    public function transaksi(Request $request)
+    public function simpanResep(Request $request)
     {
         // SECTION Tambah keranjang
         /* -------------------------------------------------------------------------- */
@@ -87,28 +89,22 @@ class KeranjangController extends Controller
         // NOTE POST /admin/keranjang/tambah-keranjang
 
         $id = $request->id;
+        $signa = $request->signa;
 
         if (!empty($id) && count($id) > 0) {
             try {
-
                 for($i = 0; $i < count($id); $i++) {
-                    $pilih = DB::table('keranjang')->where('id', $id[$i])->first();
-
-                    DB::table('keranjang')->insert([
-                        'name' => $pilih->keranjangalkes_nama,
-                        'qty' => 1,
-                        'status' => 'non racikan',
-                        'id_keranjang' => $pilih->id,
-                        'created_at' => Carbon::now(),
+                    DB::table('keranjang')->where('id', $id[$i])->update([
+                        'nama_resep' => $request->name,
+                        'id_signa' => $signa[$i],
+                        'is_active' => 0,
+                        'updated_at' => Carbon::now(),
                     ]);
-
                 }
-
                 $data = [
-                    'msg'       => 'keranjang Berhasil Ditambahkan Ke keranjang',
+                    'msg'       => 'Resep obat berhasil di simpan',
                     'status'    => TRUE
                 ];
-
             } catch (\Exception $e) {
                 $data = [
                     'msg'       => $e->getMessage(),
@@ -124,5 +120,29 @@ class KeranjangController extends Controller
 
         return Response::json($data);
         // !SECTION Tambah keranjang
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::table('keranjang')->where('id', $id)->update([
+                'is_active' => 0,
+            ]);
+
+            $data = [
+                'msg'       => 'Data berhasil di Remove',
+                'status'    => True
+            ];
+
+        } catch (\Exception $e) {
+
+            $data = [
+                'msg'       => $e->getMessage(),
+                'status'    => False,
+            ];
+
+        }
+
+        return Response::json($data);
     }
 }

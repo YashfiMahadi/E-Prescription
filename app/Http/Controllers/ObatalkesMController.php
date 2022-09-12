@@ -108,7 +108,6 @@ class ObatalkesMController extends Controller
             ];
         }
 
-
         return Response::json($data);
     }
 
@@ -127,16 +126,42 @@ class ObatalkesMController extends Controller
         if (!empty($id) && count($id) > 0) {
             try {
 
-                for($i = 0; $i < count($id); $i++) {
-                    $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+                $id = $request->id;
+                $qty = $request->qty;
 
-                    DB::table('keranjang')->insert([
-                        'name' => $pilih->obatalkes_nama,
-                        'qty' => $qty[$i],
-                        'status' => 'non racikan',
-                        'id_obat' => $pilih->obatalkes_id,
+                if (!empty($request->racikan)) {
+                    $create = DB::table('keranjang')->insertGetId([
+                        'name' => $request->racikan,
+                        'qty' => 1,
+                        'status' => 'racikan',
                         'created_at' => Carbon::now(),
                     ]);
+
+                    $createId = $create;
+
+                    for($i = 0; $i < count($id); $i++) {
+                        $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+
+                        DB::table('keranjang_obat')->insert([
+                            'keranjang_id' => $createId,
+                            'obat_id' => $pilih->obatalkes_id,
+                            'qty_obat' => $qty[$i],
+                            'created_at' => Carbon::now(),
+                        ]);
+                    }
+                } else {
+
+                    for($i = 0; $i < count($id); $i++) {
+                        $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+
+                        DB::table('keranjang')->insert([
+                            'name' => $pilih->obatalkes_nama,
+                            'qty' => $qty[$i],
+                            'status' => 'non racikan',
+                            'id_obat' => $pilih->obatalkes_id,
+                            'created_at' => Carbon::now(),
+                        ]);
+                    }
 
                 }
 
@@ -148,6 +173,7 @@ class ObatalkesMController extends Controller
             } catch (\Exception $e) {
 
                 $data = [
+                    'line'      => $e->getLine(),
                     'msg'       => $e->getMessage(),
                     'status'    => False,
                 ];

@@ -1,4 +1,4 @@
-<div class="modal fade" id="showData" tabindex="-1" role="dialog">
+<div class="modal fade" id="Racikan" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,29 +8,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kode</th>
-                            <th>Nama</th>
-                            <th>Tanggal Dibuat</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableDataObat">
-                    </tbody>
-                </table>
-
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Nama</th>
+                                <th>Tanggal Dibuat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableDataObat">
+                        </tbody>
+                    </table>
+                </div>
                 <div>
                     <form method="post" id="formDataObat">
-                        <div class="form-group">
-                            <label for="signa">Pilih Signa</label>
-                            <select name="signa" id="signa">
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="tambahKeranjang">
-                            <i class="zmdi zmdi-shopping-cart-plus" style="font-size: 1.2rem"></i>
-                            Tambah Ke Keranjang
-                        </button>
                     </form>
                 </div>
             </div>

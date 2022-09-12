@@ -27,3 +27,5 @@ Route::post('/admin/obat/tambah-keranjang', [ObatalkesMController::class, 'tamba
 
 Route::get('/admin/keranjang', [KeranjangController::class, 'index']);
 Route::get('/admin/keranjang/{id}', [KeranjangController::class, 'show']);
+Route::post('/admin/keranjang/simpan-resep', [KeranjangController::class, 'simpanResep']);
+Route::post('/admin/keranjang/{id}/delete', [KeranjangController::class, 'destroy']);
