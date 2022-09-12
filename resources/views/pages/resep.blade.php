@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Keranjang')
+@section('title', 'Resep')
 
 @push('head')
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
@@ -17,8 +17,8 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h4><strong>Keranjang</strong></h4>
-                        <span>Data Keranjang</span>
+                        <h4><strong>Resep</strong></h4>
+                        <span>Data Resep</span>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dprd-prov') }}">Keranjang</a> </li>
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/resep') }}">Resep</a> </li>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,8 @@
                 <div class="card" id="tableCard">
                     <div class="card-header bg-default">
                         <div class="d-flex justify-content-between">
-                            <h5>Table Keranjang</h5>
+                            <h5>Table Resep @isset($keranjang) {{ $keranjang->nama_resep }} @endisset</h5>
+
                         </div>
                     </div>
                     <div class="card-body">
@@ -53,37 +54,14 @@
                                         <th>No</th>
                                         <th>nama</th>
                                         <th>Status</th>
+                                        <th>Signa</th>
                                         <th>Jumlah obat</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                             </table>
                         </div>
-                        @if (count($keranjang) > 0)
-                        <form method="POST" id="formObatTransaksi">
-                            <div class="form-group">
-                                <label for="name">Nama resep Obat </label>
-                                <input type="text" name="name" class="form-control" id="nama" placeholder="isi nama resep" required>
-                            </div>
-                            @foreach ($keranjang as $value)
-                                <div class="form-group">
-                                    <label for="signa">Pilih signa {{ $value->name }} </label>
-                                    <input type="hidden" name="id[]" id="id" value="{{ $value->id }}">
-                                    <select name="signa[]" class="form-control" id="signa" required>
-                                        @foreach ($signa as $item)
-                                            <option value="{{ $item->signa_id }}">{{ $item->signa_nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforeach
-                            <button type="button" class="btn btn-primary" id="simpanResep">
-                                <i class="ti-save" style="font-size: 1.2rem"></i>
-                                Simpan resep
-                            </button>
-                        </form>
-                        @endif
                     </div>
                 </div>
             </div>

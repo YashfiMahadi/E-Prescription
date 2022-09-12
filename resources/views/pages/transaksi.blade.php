@@ -28,7 +28,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dprd-prov') }}">Keranjang</a> </li>
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/resep') }}">Keranjang</a> </li>
                     </ul>
                 </div>
             </div>

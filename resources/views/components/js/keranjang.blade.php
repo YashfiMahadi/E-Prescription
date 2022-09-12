@@ -116,6 +116,9 @@
                             data.msg,
                             'success'
                         )
+
+                        window.location.href = "{{ URL::to('/admin/resep') }}";
+
                     } else {
                         Swal.fire(
                             'Error!',

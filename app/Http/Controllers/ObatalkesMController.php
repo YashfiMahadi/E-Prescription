@@ -124,60 +124,81 @@ class ObatalkesMController extends Controller
         $qty = $request->qty;
 
         if (!empty($id) && count($id) > 0) {
-            try {
 
-                $id = $request->id;
-                $qty = $request->qty;
+            $rules = [
+                'id[]' => 'required',
+                'qty[]' => 'required',
+            ];
 
-                if (!empty($request->racikan)) {
-                    $create = DB::table('keranjang')->insertGetId([
-                        'name' => $request->racikan,
-                        'qty' => 1,
-                        'status' => 'racikan',
-                        'created_at' => Carbon::now(),
-                    ]);
+            $text = [
+                'id[].required' => 'id tidak boleh kosong',
+                'qty[].required' => 'jumlah tidak boleh kosong',
+            ];
 
-                    $createId = $create;
+            $validasi = Validator::make($request->all(), $rules, $text);
 
-                    for($i = 0; $i < count($id); $i++) {
-                        $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
 
-                        DB::table('keranjang_obat')->insert([
-                            'keranjang_id' => $createId,
-                            'obat_id' => $pilih->obatalkes_id,
-                            'qty_obat' => $qty[$i],
+            if ($request->qty == null) {
+                $data = [
+                    'msg'       => $validasi->errors()->first(),
+                    'status'    => FALSE
+                ];
+            } else {
+                try {
+
+                    $id = $request->id;
+                    $qty = $request->qty;
+
+                    if (!empty($request->racikan)) {
+                        $create = DB::table('keranjang')->insertGetId([
+                            'name' => $request->racikan,
+                            'qty' => 1,
+                            'status' => 'racikan',
                             'created_at' => Carbon::now(),
                         ]);
-                    }
-                } else {
 
-                    for($i = 0; $i < count($id); $i++) {
-                        $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+                        $createId = $create;
 
-                        DB::table('keranjang')->insert([
-                            'name' => $pilih->obatalkes_nama,
-                            'qty' => $qty[$i],
-                            'status' => 'non racikan',
-                            'id_obat' => $pilih->obatalkes_id,
-                            'created_at' => Carbon::now(),
-                        ]);
+                        for($i = 0; $i < count($id); $i++) {
+                            $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+
+                            DB::table('keranjang_obat')->insert([
+                                'keranjang_id' => $createId,
+                                'obat_id' => $pilih->obatalkes_id,
+                                'qty_obat' => $qty[$i] ?? 1,
+                                'created_at' => Carbon::now(),
+                            ]);
+                        }
+                    } else {
+
+                        for($i = 0; $i < count($id); $i++) {
+                            $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+
+                            DB::table('keranjang')->insert([
+                                'name' => $pilih->obatalkes_nama,
+                                'qty' => $qty[$i] ?? 1,
+                                'status' => 'non racikan',
+                                'id_obat' => $pilih->obatalkes_id,
+                                'created_at' => Carbon::now(),
+                            ]);
+                        }
+
                     }
+
+                    $data = [
+                        'msg'       => 'Obat Berhasil Ditambahkan Ke keranjang',
+                        'status'    => TRUE
+                    ];
+
+                } catch (\Exception $e) {
+
+                    $data = [
+                        'line'      => $e->getLine(),
+                        'msg'       => $e->getMessage(),
+                        'status'    => False,
+                    ];
 
                 }
-
-                $data = [
-                    'msg'       => 'Obat Berhasil Ditambahkan Ke keranjang',
-                    'status'    => TRUE
-                ];
-
-            } catch (\Exception $e) {
-
-                $data = [
-                    'line'      => $e->getLine(),
-                    'msg'       => $e->getMessage(),
-                    'status'    => False,
-                ];
-
             }
 
         } else {

@@ -90,8 +90,12 @@ class KeranjangController extends Controller
 
         $id = $request->id;
         $signa = $request->signa;
-
-        if (!empty($id) && count($id) > 0) {
+        if ($request->name == '') {
+            $data = [
+                'msg'       => 'Nama harus di isi',
+                'status'    => FALSE
+            ];
+        } elseif (!empty($id) && count($id) > 0) {
             try {
                 for($i = 0; $i < count($id); $i++) {
                     DB::table('keranjang')->where('id', $id[$i])->update([

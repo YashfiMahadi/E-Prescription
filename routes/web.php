@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ObatalkesMController;
+use App\Http\Controllers\ResepController;
 use App\Http\Controllers\SignaMController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/keranjang/{id}', [KeranjangController::class, 'show']);
     Route::post('/admin/keranjang/simpan-resep', [KeranjangController::class, 'simpanResep']);
     Route::post('/admin/keranjang/{id}/delete', [KeranjangController::class, 'destroy']);
+
+    Route::get('/admin/resep', [ResepController::class, 'index']);
+    Route::get('/admin/resep/{id}', [ResepController::class, 'show']);
 });
