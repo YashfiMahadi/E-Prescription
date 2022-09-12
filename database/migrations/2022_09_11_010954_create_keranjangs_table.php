@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('signa_ms', function (Blueprint $table) {
+        Schema::create('keranjang', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->decimal('qty');
+            $table->enum('status', ['non racikan','racikan'])->default('non racikan');
+            $table->integer('id_obat');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signa_ms');
+        Schema::dropIfExists('keranjang');
     }
 };

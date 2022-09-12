@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Obat')
+@section('title', 'Obat Simpan')
 
 @push('head')
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
@@ -17,8 +17,8 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h4><strong>Obat</strong></h4>
-                        <span>Data obat</span>
+                        <h4><strong>Obat Simpan</strong></h4>
+                        <span>Data Obat Simpan</span>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="{{ URL::to('/admin') }}"> <i class="feather icon-home"></i> </a>
+                            <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/Obat') }}">Obat</a> </li>
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/obat') }}">obat simpan</a> </li>
                     </ul>
                 </div>
             </div>
@@ -42,50 +42,51 @@
                 <div class="card" id="tableCard">
                     <div class="card-header bg-default">
                         <div class="d-flex justify-content-between">
-                            <h5>Table Obat</h5>
+                            <h5>Simpan obat</h5>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" id="createForm">
-                            <div class="row">
-                                <div class="col-md-6">
-
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="button" class="btn btn-secondary" id="racikan">
-                                        <i class="icofont icofont-test-bulb" style="font-size: 1.2rem"></i>
-                                        Racikan
-                                    </button>
-                                    <button type="button" class="btn btn-success" id="simpanObat">
-                                        <i class="ti-save" style="font-size: 1.2rem"></i>
-                                        Simpan obat
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="table-responsive my-3">
-                                <table class="table table-striped" id="table">
-                                    <thead>
+                        <div class="table-responsive">
+                            <table class="table table-bordered w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal Dibuat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($pilih as $item)
                                         <tr>
-                                            <th>No</th>
-                                            <th>Kode</th>
-                                            <th>Nama</th>
-                                            <th>Stok</th>
-                                            <th>Tanggal Dibuat</th>
-                                            <th>Aksi</th>
+                                            <td>{{ $item->obatalkes_kode }}</td>
+                                            <td>{{ $item->obatalkes_nama }}</td>
+                                            <td>{{ $item->created_date }}</td>
                                         </tr>
-                                    </thead>
-                                        <tbody>
-                                        </tbody>
-                                </table>
-                            </div>
-                        </form>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <form method="post" id="createForm">
+                                <div>
+                                    @foreach ($pilih as $item)
+                                        <div class="form-group">
+                                            <label for="qty">jumlah obat {{ $item->obatalkes_nama }} </label>
+                                            <input type="number" name="qty[]" class="form-control" id="qty" placeholder="Jumlah" required>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button type="button" class="btn btn-primary" id="tambahKeranjang">
+                                    <i class="zmdi zmdi-shopping-cart-plus" style="font-size: 1.2rem"></i>
+                                    Tambah Ke Keranjang
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    @include('components.columns.obat.modalNonRacikan')
 @endsection
 
 @push('script')
@@ -105,5 +106,4 @@
     <script type="text/javascript" src="{{ asset('bower_components\select2\js\select2.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components\bootstrap-multiselect\js\bootstrap-multiselect.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components\multiselect\js\jquery.multi-select.js') }}"></script>
-    @include($js)
 @endpush

@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class ObatalkesMController extends Controller
+class KeranjangController extends Controller
 {
     public function index()
     {
+
         $data = [
-            'link' => '/admin/obat',
-            'js' => 'components.js.obat',
+            'link' => '/admin/keranjang',
+            'js' => 'components.js.keranjang',
+            'keranjang' => DB::table('keranjang')->orderBy('id', 'DESC')->get(),
+            'signa' => DB::table('signa_m')->orderBy('signa_id', 'DESC')->get(),
         ];
 
-        return view('pages.obat', $data);
+        return view('pages.keranjang', $data);
     }
 
     public function show($id)
@@ -27,15 +30,15 @@ class ObatalkesMController extends Controller
         /* -------------------------------------------------------------------------- */
         /*                                 AMBIL DATA                                 */
         /* -------------------------------------------------------------------------- */
-        // NOTE GET /admin/obat/{id}
+        // NOTE GET /admin/keranjang/{id}
         if (is_numeric($id)) {
             // SECTION ambil data tunggal
-            $obat = DB::table('obatalkes_m')
-                ->where('obatalkes_id', $id)
+            $keranjang = DB::table('keranjang')
+                ->where('id', $id)
                 ->first();
 
             $data = [
-                'obat' => $obat,
+                'keranjang' => $keranjang,
             ];
 
             return Response::json($data);
@@ -43,36 +46,27 @@ class ObatalkesMController extends Controller
         } else {
             // SECTION datatables
             // SECTION data
-            $data   = DB::table('obatalkes_m')
-                ->orderBy('obatalkes_id', 'DESC')
+            $data   = DB::table('keranjang')
+                ->orderBy('id', 'DESC')
                 ->get();
             // !SECTION data
             // SECTION kembalian
             return DataTables::of($data)
                 ->editColumn(
-                    'stok',
+                    'qty',
                     function ($row) {
-                        $stok = number_format($row->stok);
+                        $qty = number_format($row->qty);
 
-                        return $stok;
-                    }
-                )
-                ->editColumn(
-                    'created_date',
-                    function ($row) {
-                        $created_date = date('d, M Y H:i', strtotime($row->created_date));
-
-                        return $created_date;
+                        return $qty;
                     }
                 )
                 ->addColumn(
                     'action',
                     function ($row) {
                         $data   = [
-                            'id'        => $row->obatalkes_id,
-                            'stok'      => $row->stok,
+                            'id' => $row->id,
                         ];
-                        return view('components.buttons.obat', $data);
+                        return view('components.buttons.keranjang', $data);
                     }
                 )
                 ->addIndexColumn()
@@ -84,79 +78,46 @@ class ObatalkesMController extends Controller
         // !SECTION AMBIL DATA
     }
 
-    public function create(Request $request)
-    {
-        $id = $request->id;
-
-        if (!empty($id) && count($id) > 0) {
-
-            $pilih = [];
-
-            for($i = 0; $i < count($id); $i++) {
-                $pilih[] = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
-            }
-
-            $data = [
-                'pilih'       => $pilih,
-                'status'    => TRUE
-            ];
-
-        } else {
-            $data = [
-                'msg'       => 'Harap pilih obat',
-                'status'    => FALSE
-            ];
-        }
-
-
-        return Response::json($data);
-    }
-
-    public function tambahKeranjang(Request $request)
+    public function transaksi(Request $request)
     {
         // SECTION Tambah keranjang
         /* -------------------------------------------------------------------------- */
         /*                              TAMBAH KERANJANG                              */
         /* -------------------------------------------------------------------------- */
-        // NOTE POST /admin/obat/tambah-keranjang
-
+        // NOTE POST /admin/keranjang/tambah-keranjang
 
         $id = $request->id;
-        $qty = $request->qty;
 
         if (!empty($id) && count($id) > 0) {
             try {
 
                 for($i = 0; $i < count($id); $i++) {
-                    $pilih = DB::table('obatalkes_m')->where('obatalkes_id', $id[$i])->first();
+                    $pilih = DB::table('keranjang')->where('id', $id[$i])->first();
 
                     DB::table('keranjang')->insert([
-                        'name' => $pilih->obatalkes_nama,
-                        'qty' => $qty[$i],
+                        'name' => $pilih->keranjangalkes_nama,
+                        'qty' => 1,
                         'status' => 'non racikan',
-                        'id_obat' => $pilih->obatalkes_id,
+                        'id_keranjang' => $pilih->id,
                         'created_at' => Carbon::now(),
                     ]);
 
                 }
 
                 $data = [
-                    'msg'       => 'Obat Berhasil Ditambahkan Ke keranjang',
+                    'msg'       => 'keranjang Berhasil Ditambahkan Ke keranjang',
                     'status'    => TRUE
                 ];
 
             } catch (\Exception $e) {
-
                 $data = [
                     'msg'       => $e->getMessage(),
                     'status'    => False,
                 ];
-
             }
-
         } else {
             $data = [
-                'msg'       => 'Harap pilih obat',
+                'msg'       => 'Harap pilih keranjang',
                 'status'    => FALSE
             ];
         }

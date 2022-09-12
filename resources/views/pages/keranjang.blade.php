@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Obat')
+@section('title', 'Keranjang')
 
 @push('head')
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
@@ -17,8 +17,8 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h4><strong>Obat</strong></h4>
-                        <span>Data obat</span>
+                        <h4><strong>Keranjang</strong></h4>
+                        <span>Data Keranjang</span>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class="breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="{{ URL::to('/admin') }}"> <i class="feather icon-home"></i> </a>
+                            <a href="{{ URL::to('/') }}"> <i class="feather icon-home"></i> </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/Obat') }}">Obat</a> </li>
+                        <li class="breadcrumb-item"><a href="{{ URL::to('/admin/dprd-prov') }}">Keranjang</a> </li>
                     </ul>
                 </div>
             </div>
@@ -42,50 +42,46 @@
                 <div class="card" id="tableCard">
                     <div class="card-header bg-default">
                         <div class="d-flex justify-content-between">
-                            <h5>Table Obat</h5>
+                            <h5>Table Keranjang</h5>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" id="createForm">
-                            <div class="row">
-                                <div class="col-md-6">
-
+                        <div class="table-responsive my-3">
+                            <table class="table table-striped table-bordered w-100" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>nama</th>
+                                        <th>Status</th>
+                                        <th>Jumlah obat</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form method="post" id="formObatTransaksi">
+                            @foreach ($keranjang as $value)
+                                <div class="form-group">
+                                    <label for="signa">Pilih signa {{ $value->name }} </label>
+                                    <select name="signa[]" class="form-control" id="signa" required>
+                                        @foreach ($signa as $item)
+                                            <option value="{{ $item->signa_id }}">{{ $item->signa_nama }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="button" class="btn btn-secondary" id="racikan">
-                                        <i class="icofont icofont-test-bulb" style="font-size: 1.2rem"></i>
-                                        Racikan
-                                    </button>
-                                    <button type="button" class="btn btn-success" id="simpanObat">
-                                        <i class="ti-save" style="font-size: 1.2rem"></i>
-                                        Simpan obat
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="table-responsive my-3">
-                                <table class="table table-striped" id="table">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Kode</th>
-                                            <th>Nama</th>
-                                            <th>Stok</th>
-                                            <th>Tanggal Dibuat</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                        <tbody>
-                                        </tbody>
-                                </table>
-                            </div>
+                            @endforeach
+                            <button type="button" class="btn btn-primary" id="tambahKeranjang">
+                                <i class="fa fa-credit-card-alt" style="font-size: 1.2rem"></i>
+                                transaksi
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    @include('components.columns.obat.modalNonRacikan')
 @endsection
 
 @push('script')
