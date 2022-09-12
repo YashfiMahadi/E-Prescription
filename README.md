@@ -30,7 +30,7 @@
         <li> import database ke database yang sudah di buat </li>
         <li> ubah nama database yang ada pada file env</li>
         <li>
-            apabila berhasil ketik <br> <br>
+            apabila nama sudah di ubah <br> <br>
             php artisan key:generate <br> <br>
         </li>
         <li>
