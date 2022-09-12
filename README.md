@@ -16,22 +16,22 @@
         <li> buka terminal </li>
         <li>
             ketik cd letak file yang sudah di Extract tadi contoh <br> <br>
-            cd c:/project/laravel/E-Prescription-main <br>
+            cd c:/project/laravel/E-Prescription-main <br> <br>
         </li>
         <li>
             lalu ketik <br> <br>
-            composer update <br>
+            composer update <br> <br>
         </li>
         <li>
             untuk copy file env nya ketik <br> <br>
-            copy .env.example .env <br>
+            copy .env.example .env <br> <br>
         </li>
         <li> untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
         <li> import ke database anda</li>
         <li> ubah nama database yang ada pada file env</li>
         <li>
             apabila berhasil ketik <br> <br>
-            php artisan key:generate <br>
+            php artisan key:generate <br> <br>
         </li>
         <li>
             dan terakhir untuk menjalankan aplikasinya ketik <br> <br>
