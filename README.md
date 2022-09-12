@@ -27,7 +27,7 @@
             copy .env.example .env <br> <br>
         </li>
         <li> untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
-        <li> import ke database anda</li>
+        <li> import database ke database yang sudah di buat </li>
         <li> ubah nama database yang ada pada file env</li>
         <li>
             apabila berhasil ketik <br> <br>

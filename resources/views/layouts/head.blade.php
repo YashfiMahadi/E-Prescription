@@ -27,4 +27,3 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets\css\style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets\css\jquery.mCustomScrollbar.css') }}">
 <!-- Custom css -->
-<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
