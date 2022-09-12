@@ -15,7 +15,7 @@
         <li> Pastikan PC kalian sudah terinstall composer 2.4.1 </li>
         <li> buka terminal </li>
         <li>
-            ketik cd letak file yang sudah di Extract tadi contoh <br> <br>
+            ketik cd letak file yang sudah di Extract contoh <br> <br>
             cd c:/project/laravel/E-Prescription-main <br> <br>
         </li>
         <li>
