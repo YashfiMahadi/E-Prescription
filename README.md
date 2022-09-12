@@ -37,4 +37,8 @@
             dan terakhir untuk menjalankan aplikasinya ketik <br> <br>
             php artisan serve <br>
         </li>
+        <li>
+            email    : admin@gmail.com
+            password : 12345678
+        </li>
     </ol>
