@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'index']);
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login/porses', [AuthController::class, 'proses']);
 });
 
