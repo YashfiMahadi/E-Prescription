@@ -27,7 +27,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index']);
 
     Route::get('/admin/obat', [ObatalkesMController::class, 'index']);
     Route::get('/admin/obat/{id}', [ObatalkesMController::class, 'show']);
