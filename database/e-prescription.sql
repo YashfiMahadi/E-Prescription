@@ -42,7 +42,6 @@ DROP TABLE IF EXISTS `keranjang`;
 CREATE TABLE IF NOT EXISTS `keranjang` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_resep` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `qty` decimal(8,2) NOT NULL DEFAULT '1.00',
   `status` enum('non racikan','racikan') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'non racikan',
   `id_obat` int(11) DEFAULT NULL,
@@ -51,11 +50,15 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table e_prescription.keranjang: ~0 rows (approximately)
+-- Dumping data for table e_prescription.keranjang: ~3 rows (approximately)
 DELETE FROM `keranjang`;
 /*!40000 ALTER TABLE `keranjang` DISABLE KEYS */;
+INSERT INTO `keranjang` (`id`, `name`, `qty`, `status`, `id_obat`, `id_signa`, `is_active`, `created_at`, `updated_at`) VALUES
+	(50, 'SOFTBAN 3 INCH', 2.00, 'non racikan', 2500, NULL, 1, '2022-09-12 14:37:46', NULL),
+	(51, 'SOFTBAN 6 INCH', 1.00, 'non racikan', 2499, NULL, 1, '2022-09-12 14:37:46', NULL),
+	(52, 'COMBANTRIN 250 MG TAB#', 1.00, 'non racikan', 2498, NULL, 1, '2022-09-12 14:37:46', NULL);
 /*!40000 ALTER TABLE `keranjang` ENABLE KEYS */;
 
 -- Dumping structure for table e_prescription.keranjang_obat

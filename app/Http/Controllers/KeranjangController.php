@@ -99,7 +99,6 @@ class KeranjangController extends Controller
             try {
                 for($i = 0; $i < count($id); $i++) {
                     DB::table('keranjang')->where('id', $id[$i])->update([
-                        'nama_resep' => $request->name,
                         'id_signa' => $signa[$i],
                         'is_active' => 0,
                         'updated_at' => Carbon::now(),

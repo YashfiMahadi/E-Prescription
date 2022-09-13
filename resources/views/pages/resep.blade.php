@@ -42,7 +42,7 @@
                 <div class="card" id="tableCard">
                     <div class="card-header bg-default">
                         <div class="d-flex justify-content-between">
-                            <h5>Table Resep @isset($keranjang) {{ $keranjang->nama_resep }} @endisset</h5>
+                            <h5>Table Resep</h5>
 
                         </div>
                     </div>

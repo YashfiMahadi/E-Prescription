@@ -16,7 +16,6 @@ class ResepController extends Controller
         $data = [
             'link' => '/admin/resep',
             'js' => 'components.js.resep',
-            'keranjang' => DB::table('keranjang')->orderBy('id', 'DESC')->where('is_active', '<>', '1')->first(),
         ];
 
         return view('pages.resep', $data);
