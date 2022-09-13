@@ -63,10 +63,6 @@
                         </div>
                         @if (count($keranjang) > 0)
                         <form method="POST" id="formObatTransaksi">
-                            <div class="form-group">
-                                <label for="name">Nama resep Obat </label>
-                                <input type="text" name="name" class="form-control" id="nama" placeholder="isi nama resep" required>
-                            </div>
                             @foreach ($keranjang as $value)
                                 <div class="form-group">
                                     <label for="signa">Pilih signa {{ $value->name }} </label>
