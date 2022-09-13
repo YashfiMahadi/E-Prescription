@@ -13,32 +13,32 @@
         <li> Download file di atas E-Prescription-main.zip </li>
         <li> Extract file yang sudah di download </li>
         <li> Pastikan PC kalian sudah terinstall composer 2.4.1 </li>
-        <li> buka terminal </li>
+        <li> Buka terminal </li>
         <li>
-            ketik cd letak file yang sudah di Extract contoh <br> <br>
+            Ketik cd letak file yang sudah di Extract contoh <br> <br>
             cd c:/project/laravel/E-Prescription-main <br> <br>
         </li>
         <li>
-            lalu ketik <br> <br>
+            Lalu ketik <br> <br>
             composer update <br> <br>
         </li>
         <li>
-            untuk copy file env nya ketik <br> <br>
+            Untuk copy file env nya ketik <br> <br>
             copy .env.example .env <br> <br>
         </li>
-        <li> untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
-        <li> import database ke database yang sudah di buat </li>
-        <li> ubah nama database yang ada pada file env</li>
+        <li> Untuk database nya ada di dalam folder database nama file nya e-prescription.sql</li>
+        <li> Import database ke database yang sudah di buat </li>
+        <li> Ubah nama database yang ada pada file env</li>
         <li>
-            apabila nama database sudah di ubah, ketik di terminal <br> <br>
+            Apabila nama database sudah di ubah, ketik di terminal <br> <br>
             php artisan key:generate <br> <br>
         </li>
         <li>
-            dan terakhir untuk menjalankan aplikasinya ketik <br> <br>
+            Dan terakhir untuk menjalankan aplikasinya ketik <br> <br>
             php artisan serve <br> <br>
         </li>
         <li>
-            email    : admin@gmail.com <br>
-            password : 12345678
+            Email    : admin@gmail.com <br>
+            Password : 12345678
         </li>
     </ol>
