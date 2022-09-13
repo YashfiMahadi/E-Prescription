@@ -55,10 +55,6 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
 -- Dumping data for table e_prescription.keranjang: ~3 rows (approximately)
 DELETE FROM `keranjang`;
 /*!40000 ALTER TABLE `keranjang` DISABLE KEYS */;
-INSERT INTO `keranjang` (`id`, `name`, `qty`, `status`, `id_obat`, `id_signa`, `is_active`, `created_at`, `updated_at`) VALUES
-	(50, 'SOFTBAN 3 INCH', 2.00, 'non racikan', 2500, NULL, 1, '2022-09-12 14:37:46', NULL),
-	(51, 'SOFTBAN 6 INCH', 1.00, 'non racikan', 2499, NULL, 1, '2022-09-12 14:37:46', NULL),
-	(52, 'COMBANTRIN 250 MG TAB#', 1.00, 'non racikan', 2498, NULL, 1, '2022-09-12 14:37:46', NULL);
 /*!40000 ALTER TABLE `keranjang` ENABLE KEYS */;
 
 -- Dumping structure for table e_prescription.keranjang_obat
@@ -76,9 +72,6 @@ CREATE TABLE IF NOT EXISTS `keranjang_obat` (
 -- Dumping data for table e_prescription.keranjang_obat: ~2 rows (approximately)
 DELETE FROM `keranjang_obat`;
 /*!40000 ALTER TABLE `keranjang_obat` DISABLE KEYS */;
-INSERT INTO `keranjang_obat` (`id`, `keranjang_id`, `obat_id`, `qty_obat`, `created_at`, `updated_at`) VALUES
-	(3, 46, 2500, 2.00, '2022-09-12 07:47:42', NULL),
-	(4, 46, 2499, 2.00, '2022-09-12 07:47:42', NULL);
 /*!40000 ALTER TABLE `keranjang_obat` ENABLE KEYS */;
 
 -- Dumping structure for table e_prescription.keranjang_transaksions
